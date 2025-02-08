@@ -1,4 +1,5 @@
 #ifdef ENABLE_RGB_MATRIX_ALPHAS_MODS
+#define RGB_MATRIX_EFFECT_ALPHAS_MODS
 RGB_MATRIX_EFFECT(ALPHAS_MODS)
 #    ifdef RGB_MATRIX_CUSTOM_EFFECT_IMPLS
 
@@ -6,10 +7,10 @@ RGB_MATRIX_EFFECT(ALPHAS_MODS)
 bool ALPHAS_MODS(effect_params_t* params) {
     RGB_MATRIX_USE_LIMITS(led_min, led_max);
 
-    hsv_t hsv  = rgb_matrix_config.hsv;
-    rgb_t rgb1 = rgb_matrix_hsv_to_rgb(hsv);
+    HSV hsv  = rgb_matrix_config.hsv;
+    RGB rgb1 = rgb_matrix_hsv_to_rgb(hsv);
     hsv.h += rgb_matrix_config.speed;
-    rgb_t rgb2 = rgb_matrix_hsv_to_rgb(hsv);
+    RGB rgb2 = rgb_matrix_hsv_to_rgb(hsv);
 
     for (uint8_t i = led_min; i < led_max; i++) {
         RGB_MATRIX_TEST_LED_FLAGS();

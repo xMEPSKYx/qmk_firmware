@@ -2,16 +2,18 @@
 #    if defined(ENABLE_RGB_MATRIX_SPLASH) || defined(ENABLE_RGB_MATRIX_MULTISPLASH)
 
 #        ifdef ENABLE_RGB_MATRIX_SPLASH
+#define RGB_MATRIX_EFFECT_SPLASH
 RGB_MATRIX_EFFECT(SPLASH)
 #        endif
 
 #        ifdef ENABLE_RGB_MATRIX_MULTISPLASH
+#define RGB_MATRIX_EFFECT_MULTISPLASH
 RGB_MATRIX_EFFECT(MULTISPLASH)
 #        endif
 
 #        ifdef RGB_MATRIX_CUSTOM_EFFECT_IMPLS
 
-hsv_t SPLASH_math(hsv_t hsv, int16_t dx, int16_t dy, uint8_t dist, uint16_t tick) {
+HSV SPLASH_math(HSV hsv, int16_t dx, int16_t dy, uint8_t dist, uint16_t tick) {
     uint16_t effect = tick - dist;
     if (effect > 255) effect = 255;
     hsv.h += effect;

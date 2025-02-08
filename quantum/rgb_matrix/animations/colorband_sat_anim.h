@@ -1,8 +1,9 @@
 #ifdef ENABLE_RGB_MATRIX_BAND_SAT
+#define RGB_MATRIX_EFFECT_BAND_SAT
 RGB_MATRIX_EFFECT(BAND_SAT)
 #    ifdef RGB_MATRIX_CUSTOM_EFFECT_IMPLS
 
-static hsv_t BAND_SAT_math(hsv_t hsv, uint8_t i, uint8_t time) {
+static HSV BAND_SAT_math(HSV hsv, uint8_t i, uint8_t time) {
     int16_t s = hsv.s - abs(scale8(g_led_config.point[i].x, 228) + 28 - time) * 8;
     hsv.s     = scale8(s < 0 ? 0 : s, hsv.s);
     return hsv;

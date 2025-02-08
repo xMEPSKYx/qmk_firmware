@@ -13,7 +13,10 @@
 #define _ADJUST 6
 
 enum preonic_keycodes {
-  LOWER = SAFE_RANGE,
+  QWERTY = SAFE_RANGE,
+  COLEMAK,
+  DVORAK,
+  LOWER,
   RAISE,
   BACKLIT,
   RGBLED_TOGGLE,
@@ -35,10 +38,6 @@ enum preonic_keycodes {
 // Requires KC_TRNS/_______ for the trigger key in the destination layer
 #define LT_MC(kc)   LT(_MOUSECURSOR, kc)        // L-ayer T-ap M-ouse C-ursor
 #define LT_RAI(kc)  LT(_RAISE, kc)              // L-ayer T-ap to Raise
-
-#define QWERTY PDF(_QWERTY)
-#define COLEMAK PDF(_COLEMAK)
-#define DVORAK PDF(_DVORAK)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -201,6 +200,18 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
+    case QWERTY:
+      if (record->event.pressed) {
+        set_single_persistent_default_layer(_QWERTY);
+      }
+      return false;
+      break;
+    case COLEMAK:
+      if (record->event.pressed) {
+        set_single_persistent_default_layer(_COLEMAK);
+      }
+      return false;
+      break;
     case LOWER:
       if (record->event.pressed) {
           //not sure how to have keyboard check mode and set it to a variable, so my work around

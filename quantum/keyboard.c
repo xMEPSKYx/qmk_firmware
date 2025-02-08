@@ -110,6 +110,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifdef EEPROM_DRIVER
 #    include "eeprom_driver.h"
 #endif
+#ifdef QMK_SETTINGS
+#   include "qmk_settings.h"
+#endif
+#ifdef VIAL_ENABLE
+#   include "vial.h"
+#endif
 #if defined(CRC_ENABLE)
 #    include "crc.h"
 #endif
@@ -139,9 +145,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #endif
 #ifdef OS_DETECTION_ENABLE
 #    include "os_detection.h"
-#endif
-#ifdef LAYER_LOCK_ENABLE
-#    include "layer_lock.h"
 #endif
 
 static uint32_t last_input_modification_time = 0;
@@ -321,6 +324,12 @@ void keyboard_setup(void) {
     print_set_sendchar(sendchar);
 #ifdef EEPROM_DRIVER
     eeprom_driver_init();
+#endif
+#ifdef VIAL_ENABLE
+    vial_init();
+#endif
+#ifdef QMK_SETTINGS
+    qmk_settings_init();
 #endif
     matrix_setup();
     keyboard_pre_init_kb();
@@ -657,10 +666,6 @@ void quantum_task(void) {
 
 #ifdef SECURE_ENABLE
     secure_task();
-#endif
-
-#ifdef LAYER_LOCK_ENABLE
-    layer_lock_task();
 #endif
 }
 

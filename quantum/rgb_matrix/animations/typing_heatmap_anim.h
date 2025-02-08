@@ -1,4 +1,5 @@
 #if defined(RGB_MATRIX_FRAMEBUFFER_EFFECTS) && defined(ENABLE_RGB_MATRIX_TYPING_HEATMAP)
+#define RGB_MATRIX_EFFECT_TYPING_HEATMAP
 RGB_MATRIX_EFFECT(TYPING_HEATMAP)
 #    ifdef RGB_MATRIX_CUSTOM_EFFECT_IMPLS
 #        ifndef RGB_MATRIX_TYPING_HEATMAP_INCREASE_STEP
@@ -82,8 +83,8 @@ bool TYPING_HEATMAP(effect_params_t* params) {
                 uint8_t val = g_rgb_frame_buffer[row][col];
                 if (!HAS_ANY_FLAGS(g_led_config.flags[g_led_config.matrix_co[row][col]], params->flags)) continue;
 
-                hsv_t hsv = {170 - qsub8(val, 85), rgb_matrix_config.hsv.s, scale8((qadd8(170, val) - 170) * 3, rgb_matrix_config.hsv.v)};
-                rgb_t rgb = rgb_matrix_hsv_to_rgb(hsv);
+                HSV hsv = {170 - qsub8(val, 85), rgb_matrix_config.hsv.s, scale8((qadd8(170, val) - 170) * 3, rgb_matrix_config.hsv.v)};
+                RGB rgb = rgb_matrix_hsv_to_rgb(hsv);
                 rgb_matrix_set_color(g_led_config.matrix_co[row][col], rgb.r, rgb.g, rgb.b);
 
                 if (decrease_heatmap_values) {

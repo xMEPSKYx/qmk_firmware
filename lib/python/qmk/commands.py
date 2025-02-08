@@ -55,7 +55,7 @@ def parse_configurator_json(configurator_file):
         cli.log.error(f'Invalid JSON keymap: {configurator_file} : {e.message}')
         maybe_exit(1)
 
-    keyboard = user_keymap.get('keyboard', None)
+    keyboard = user_keymap['keyboard']
     aliases = keyboard_alias_definitions()
 
     while keyboard in aliases:

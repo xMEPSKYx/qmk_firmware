@@ -240,11 +240,6 @@ extern layer_state_t layer_state;
 #    include "os_detection.h"
 #endif
 
-#ifdef LAYER_LOCK_ENABLE
-#    include "layer_lock.h"
-#endif
-
-void set_single_default_layer(uint8_t default_layer);
 void set_single_persistent_default_layer(uint8_t default_layer);
 
 #define IS_LAYER_ON(layer) layer_state_is(layer)
@@ -263,6 +258,7 @@ bool     process_record_kb(uint16_t keycode, keyrecord_t *record);
 bool     process_record_user(uint16_t keycode, keyrecord_t *record);
 void     post_process_record_kb(uint16_t keycode, keyrecord_t *record);
 void     post_process_record_user(uint16_t keycode, keyrecord_t *record);
+bool     process_record_quantum_helper(uint16_t keycode, keyrecord_t *record);
 
 void reset_keyboard(void);
 void soft_reset_keyboard(void);

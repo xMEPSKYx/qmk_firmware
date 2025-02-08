@@ -275,7 +275,6 @@ bool music_mask_kb(uint16_t keycode) {
         case QK_TO ... QK_TO_MAX:
         case QK_MOMENTARY ... QK_MOMENTARY_MAX:
         case QK_DEF_LAYER ... QK_DEF_LAYER_MAX:
-        case QK_PERSISTENT_DEF_LAYER ... QK_PERSISTENT_DEF_LAYER_MAX:
         case QK_TOGGLE_LAYER ... QK_TOGGLE_LAYER_MAX:
         case QK_ONE_SHOT_LAYER ... QK_ONE_SHOT_LAYER_MAX:
         case QK_LAYER_TAP_TOGGLE ... QK_LAYER_TAP_TOGGLE_MAX:
@@ -369,7 +368,7 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
                 eeconfig_update_kb(keyboard_config.raw);
             }
             break;
-        case QK_RGB_MATRIX_TOGGLE:
+        case RGB_TOG:
             if (record->event.pressed) {
                 switch (rgb_matrix_get_flags()) {
                     case LED_FLAG_ALL: {
@@ -405,7 +404,7 @@ void keyboard_post_init_kb(void) {
     is_launching = true;
     defer_exec(500, startup_exec, NULL);
 #endif
-    keyboard_post_init_user();
+    matrix_init_user();
 }
 
 void eeconfig_init_kb(void) {  // EEPROM is getting reset!

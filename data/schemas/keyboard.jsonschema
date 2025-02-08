@@ -45,7 +45,7 @@
         },
         "development_board": {
             "type": "string",
-            "enum": ["promicro", "elite_c", "elite_pi", "proton_c", "kb2040", "promicro_rp2040", "blok", "michi", "bit_c_pro", "stemcell", "bluepill", "blackpill_f401", "blackpill_f411", "bonsai_c4", "helios", "liatris", "imera", "svlinky"]
+            "enum": ["promicro", "elite_c", "elite_pi", "proton_c", "kb2040", "promicro_rp2040", "blok", "michi", "bit_c_pro", "stemcell", "bluepill", "blackpill_f401", "blackpill_f411", "bonsai_c4", "helios", "liatris", "imera"]
         },
         "pin_compatible": {
             "type": "string",
@@ -92,7 +92,6 @@
                 "GD32VF103",
                 "WB32F3G71",
                 "WB32FQ95",
-                "AT32F415",
                 "atmega16u2",
                 "atmega32u2",
                 "atmega16u4",
@@ -216,8 +215,8 @@
         "bootloader": {
             "type": "string",
             "enum": [
+                "vibl",
                 "apm32-dfu",
-                "at32-dfu",
                 "atmel-dfu",
                 "bootloadhid",
                 "caterina",
@@ -375,12 +374,6 @@
             }
         },
         "keycodes": {"$ref": "qmk.definitions.v1#/keycode_decl_array"},
-        "layer_lock": {
-            "type": "object",
-            "properties": {
-                "timeout": {"$ref": "qmk.definitions.v1#/unsigned_int"}
-            }
-        },
         "layout_aliases": {
             "type": "object",
             "additionalProperties": {"$ref": "qmk.definitions.v1#/layout_macro"}

@@ -1,8 +1,9 @@
 #ifdef ENABLE_RGB_MATRIX_BAND_PINWHEEL_VAL
+#define RGB_MATRIX_EFFECT_BAND_PINWHEEL_VAL
 RGB_MATRIX_EFFECT(BAND_PINWHEEL_VAL)
 #    ifdef RGB_MATRIX_CUSTOM_EFFECT_IMPLS
 
-static hsv_t BAND_PINWHEEL_VAL_math(hsv_t hsv, int16_t dx, int16_t dy, uint8_t time) {
+static HSV BAND_PINWHEEL_VAL_math(HSV hsv, int16_t dx, int16_t dy, uint8_t time) {
     hsv.v = scale8(hsv.v - time - atan2_8(dy, dx) * 3, hsv.v);
     return hsv;
 }

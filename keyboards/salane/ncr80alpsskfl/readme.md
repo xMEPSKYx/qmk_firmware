@@ -14,10 +14,6 @@ Make examples for this keyboard (after setting up your build environment):
 
     make salane/ncr80alpsskfl:default
 
-Flashing example for this keyboard:
-
-    make salane/ncr80alpsskfl:default:flash
-
 ## Bootloader
 
 Enter the bootloader in 3 ways:

@@ -32,7 +32,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "led.h"
 #include "command.h"
 #include "quantum.h"
-#include "usb_device_state.h"
 #include "version.h"
 
 #ifdef BACKLIGHT_ENABLE
@@ -46,6 +45,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifdef AUDIO_ENABLE
 #    include "audio.h"
 #endif /* AUDIO_ENABLE */
+
+#ifdef VIAL_ENABLE
+#    include "vial.h"
+#endif
 
 static bool command_common(uint8_t code);
 static void command_common_help(void);
@@ -231,8 +234,8 @@ static void print_status(void) {
         "timer_read32(): %08lX\n"
 
         , host_keyboard_leds()
-        , usb_device_state_get_protocol()
-        , usb_device_state_get_idle_rate()
+        , keyboard_protocol
+        , keyboard_idle
 #ifdef NKRO_ENABLE
         , keymap_config.nkro
 #endif
@@ -380,6 +383,9 @@ static bool command_common(uint8_t code) {
         case MAGIC_KC(MAGIC_KEY_BOOTLOADER):
         case MAGIC_KC(MAGIC_KEY_BOOTLOADER_ALT):
             print("\n\nJumping to bootloader... ");
+#ifdef VIAL_ENABLE
+            if (vial_unlocked)
+#endif
             reset_keyboard();
             break;
 

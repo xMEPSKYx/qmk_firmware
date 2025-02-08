@@ -32,27 +32,20 @@ You may use more than one slave select pin, not just the `SS` pin. This is usefu
 
 You'll need to determine which pins can be used for SPI -- as an example, STM32 parts generally have multiple SPI peripherals, labeled SPI1, SPI2, SPI3 etc.
 
-To enable SPI, modify your board's `halconf.h` to enable SPI, then modify your board's `mcuconf.h` to enable the peripheral you've chosen:
+To enable SPI, modify your board's `halconf.h` to enable SPI:
 
-::: code-group
-```c [halconf.h]
-#pragma once
-
-#define HAL_USE_SPI TRUE // [!code focus]
-#define SPI_USE_WAIT TRUE // [!code focus]
-#define SPI_SELECT_MODE SPI_SELECT_MODE_PAD // [!code focus]
-
-#include_next <halconf.h>
+```c
+#define HAL_USE_SPI TRUE
+#define SPI_USE_WAIT TRUE
+#define SPI_SELECT_MODE SPI_SELECT_MODE_PAD
 ```
-```c [mcuconf.h]
-#pragma once
 
-#include_next <mcuconf.h>
+Then, modify your board's `mcuconf.h` to enable the peripheral you've chosen, for example:
 
-#undef STM32_SPI_USE_SPI2 // [!code focus]
-#define STM32_SPI_USE_SPI2 TRUE // [!code focus]
+```c
+#undef STM32_SPI_USE_SPI2
+#define STM32_SPI_USE_SPI2 TRUE
 ```
-:::
 
 Configuration-wise, you'll need to set up the peripheral as per your MCU's datasheet -- the defaults match the pins for a Proton-C, i.e. STM32F303.
 

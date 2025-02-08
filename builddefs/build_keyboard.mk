@@ -186,10 +186,7 @@ endif
 # Have we found a keymap.json?
 ifneq ("$(wildcard $(KEYMAP_JSON))", "")
     ifneq ("$(wildcard $(KEYMAP_C))", "")
-        # Allow a separately-found keymap.c next to keymap.json -- the keymap.c
-        # generator will include the other keymap.c in the process, if supplied.
-        OTHER_KEYMAP_C := $(KEYMAP_C)
-        OPT_DEFS += -DOTHER_KEYMAP_C=\"$(OTHER_KEYMAP_C)\"
+        $(call WARNING_MESSAGE,Keymap is specified as both keymap.json and keymap.c -- keymap.json file wins.)
     endif
 
     KEYMAP_PATH := $(KEYMAP_JSON_PATH)
@@ -197,10 +194,8 @@ ifneq ("$(wildcard $(KEYMAP_JSON))", "")
     KEYMAP_C := $(INTERMEDIATE_OUTPUT)/src/keymap.c
     KEYMAP_H := $(INTERMEDIATE_OUTPUT)/src/config.h
 
-    ifeq ($(OTHER_KEYMAP_C),)
-        # Load the keymap-level rules.mk if exists (and we havent already loaded it for keymap.c)
-        -include $(KEYMAP_PATH)/rules.mk
-    endif
+    # Load the keymap-level rules.mk if exists
+    -include $(KEYMAP_PATH)/rules.mk
 
     # Load any rules.mk content from keymap.json
     INFO_RULES_MK = $(shell $(QMK_BIN) generate-rules-mk --quiet --escape --output $(INTERMEDIATE_OUTPUT)/src/rules.mk $(KEYMAP_JSON))
@@ -230,6 +225,7 @@ include $(BUILDDEFS_PATH)/converters.mk
 
 # Generate the board's version.h file.
 $(shell $(QMK_BIN) generate-version-h $(VERSION_H_FLAGS) -q -o $(INTERMEDIATE_OUTPUT)/src/version.h)
+$(shell python3 util/build_id.py >> $(INTERMEDIATE_OUTPUT)/src/version.h)
 
 MCU_ORIG := $(MCU)
 include $(wildcard $(PLATFORM_PATH)/*/mcu_selection.mk)
