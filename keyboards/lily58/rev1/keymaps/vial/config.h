@@ -30,20 +30,24 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /* Space reduction */
 
 #define DYNAMIC_KEYMAP_LAYER_COUNT 6
-#define VIAL_TAP_DANCE_ENTRIES 4
+#define VIAL_TAP_DANCE_ENTRIES 32
 #undef LOCKING_SUPPORT_ENABLE
 #undef LOCKING_RESYNC_ENABLE
-#define NO_ACTION_ONESHOT
 
 /* Select hand configuration */
 
-#define MASTER_LEFT
+#define MASTER_RIGHT
 // #define MASTER_RIGHT
 // #define EE_HANDS
 
 #define USE_SERIAL_PD2
 
 #define TAPPING_FORCE_HOLD
-#define TAPPING_TERM 100
+#define TAPPING_TERM 125
+
+/* Additional */
+
+#define SPLIT_USB_TIMEOUT 10000
+#define SPLIT_USB_TIMEOUT_POLL 10
 
 

@@ -1,1 +1,3 @@
 DEFAULT_FOLDER = lily58/rev1
+MOUSEKEY_ENABLE = yes
+
